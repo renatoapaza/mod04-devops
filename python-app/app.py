@@ -13,7 +13,7 @@ def home():
     This route renders a template named 'home.html' and passes the 'posts' list to it.
     """
     # Devuelve el resultado de renderizar el template 'home.html'.
-    return render_template('home.html')
+    return render_template('index.html')
 
 # Define una ruta para '/ping'.
 @app.route('/ping')
