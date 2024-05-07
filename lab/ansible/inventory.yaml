@@ -1,0 +1,11 @@
+webservers:
+  hosts:
+    host1:
+      ansible_host: 3.92.204.30 #
+    host2:
+      ansible_host: 3.91.232.81
+
+dbservers:
+  hosts:
+    18.232.117.41
+    18.232.117.43
