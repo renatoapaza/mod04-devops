@@ -52,6 +52,13 @@ resource "aws_security_group" "ssh" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port        = 0
     to_port          = 0
@@ -65,21 +72,22 @@ resource "aws_security_group" "ssh" {
 resource "aws_instance" "instancia" {
   ami                         = "ami-04b70fa74e45c3917"
   instance_type               = "t3.micro"
-  key_name                    = "devops-udi-2024"
+  key_name                    = "terraform_ec2_key"
   associate_public_ip_address = true
+  count                       = 2
   subnet_id                   = aws_subnet.subnet-1.id
   security_groups             = [aws_security_group.ssh.id]
 }
 
 #En este caso para facilidad, le decimos a Terraform que luego de crear el código nos devuelva la IP pública de la instancia para poder conectarnos 
-output "instance_ip" {
-  description = "The public ip for ssh access"
-  value       = aws_instance.instancia.public_ip
-}
+#output "instance_ip" {
+#  description = "The public ip for ssh access"
+#  value       = aws_instance.instancia.public_ip
+#}
 
 #Y por último, le decimos a la instancia que agregue nuestra llave pública de ssh generada antes para poder conectarnos con la llave privada luego. 
 resource "aws_key_pair" "terraform_ec2_key" {
-  key_name   = "devops-udi-2024"
+  key_name   = "terraform_ec2_key"
   public_key = file("terra-keys.pub")
 }
 

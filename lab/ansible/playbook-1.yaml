@@ -1,0 +1,17 @@
+- name: Play 1
+  hosts: webservers #Especificar el host o el grupo
+  become: yes #usuario root
+  tasks:
+    - name: Ejecuta el comando 'date'
+      command: date
+    
+    - name: Instalar apache
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+    
+    - name: Ejecute el servicio de apache
+      service:
+        name: apache2
+        state: started

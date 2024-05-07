@@ -1,9 +1,9 @@
 webservers:
   hosts:
     host1:
-      ansible_host: 3.92.204.30 #
+      ansible_host: 3.94.101.180 #
     host2:
-      ansible_host: 3.91.232.81
+      ansible_host: 52.87.238.224
 
 dbservers:
   hosts:
