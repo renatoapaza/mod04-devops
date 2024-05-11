@@ -19,5 +19,10 @@ pipeline {
                  echo "${GIT_COMMIT}"
             }
         }
+        stage('Stage-git') {
+            steps {
+                 echo "${BUILD_NUMBER}"
+            }
+        }
     }
 }
