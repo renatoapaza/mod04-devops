@@ -3,7 +3,7 @@ pipeline{
 
     environment {
         IMAGE_NAME = "renatoapaza/python-app"
-        //DOCKERHUB_CREDS = credentials("dockerhub")
+        DOCKERHUB_CREDS = credentials("dockerhub")
         NameContainer = "python-app"
     }
 
@@ -20,17 +20,17 @@ pipeline{
                 sh 'cd python-app && pip install -r requirements.txt && python3 -m unittest test_app.py'
             }
         }
-/*
+
         stage("Docker push"){
             steps{
-                    sh 'echo ${DOCKERHUB_CREDS_PSW} | docker login -u ${DOCKERHUB_CREDS_USR} --password-stdin'
-                    sh 'docker push ${IMAGE_NAME}:${BUILD_NUMBER}'
+                sh 'echo ${DOCKERHUB_CREDS_PSW} | docker login -u ${DOCKERHUB_CREDS_USR} --password-stdin'
+                sh 'docker push ${IMAGE_NAME}:${BUILD_NUMBER}'
             }
-        }        
-*/
+        }
+
         stage("Docker run"){
             steps{
-                //input message: 'Continue?'
+                input message: 'Continue?'
                 sh """
                 if docker ps -a | grep -q ${env.NameContainer}; then 
                     docker stop ${env.NameContainer} && docker rm ${env.NameContainer}
