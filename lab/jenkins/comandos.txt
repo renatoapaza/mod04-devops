@@ -22,3 +22,6 @@ Kubernetes
 #Permisos para Docker
 sudo chmod 666 /var/run/docker.sock
 
+# Crear un webhook,  setting > webhook
+https://a257-200-105-158-118.ngrok-free.app/github-webhook
+

@@ -13,5 +13,11 @@ pipeline {
                 sh 'cat README.md'
             }
         }
+
+        stage('Stage-git') {
+            steps {
+                 echo "${GIT_COMMIT}"
+            }
+        }
     }
 }
