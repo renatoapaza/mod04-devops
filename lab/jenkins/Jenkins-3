@@ -14,14 +14,15 @@ pipeline {
             }
         }
 
-        stage('Stage-git') {
+        stage('Stage-GIT_COMMIT') {
             steps {
                  echo "${GIT_COMMIT}"
             }
         }
-        stage('Stage-git') {
+
+        stage('Stage-BUILD_NUMBER') {
             steps {
-                 echo "${BUILD_NUMBER}"
+                echo "${BUILD_NUMBER}"
             }
         }
     }
