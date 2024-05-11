@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Copy git repo') {
+            script{
+                sh "ls -lsa"
+            }
+        }
+        stage('Display readme') {
+            steps {
+                //sh 'cat README.md'
+            }
+        }
+    }
+}
