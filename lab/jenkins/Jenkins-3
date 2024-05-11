@@ -9,6 +9,7 @@ pipeline {
         }
         stage('Display readme') {
             steps {
+                echo "fin"
                 //sh 'cat README.md'
             }
         }
