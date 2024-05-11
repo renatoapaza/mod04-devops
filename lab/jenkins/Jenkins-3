@@ -3,10 +3,8 @@ pipeline {
 
     stages {
         stage('Copy git repo') {
-            steps{
-                script{
-                    sh "ls -lsa"
-                }
+            steps {
+                sh "ls -lsa"
             }
         }
         stage('Display readme') {
