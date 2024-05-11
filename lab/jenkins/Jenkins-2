@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    stages {
+        stage('Stage-1') {
+            steps {
+                 echo "${BUILD_NUMBER}"
+            }
+        }
+
+        stage('Stage-2') {
+            steps {
+                script{
+                    sh "docker version"
+                }
+            }
+        }
+
+        stage('Stage-3') {
+            steps {
+                script{
+                    sh "git version"
+                }
+            }
+        }
+
+    }
+}
