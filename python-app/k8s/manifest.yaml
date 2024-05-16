@@ -20,6 +20,21 @@ spec:
             - containerPort: 5000
               name: python-app-port
 ---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: python-app-service
+#  labels:
+#    app: python-app
+#spec:
+#  type: LoadBalancer
+#  ports:
+#  - name: python-app
+#    port: 5000
+#  selector:
+#   app: python-app
+
+# ----------
 apiVersion: v1
 kind: Service
 metadata:
@@ -27,11 +42,9 @@ metadata:
   labels:
     app: python-app
 spec:
-  #type: LoadBalancer
   type: NodePort
   ports:
-  - name: python-app
-    port: 5000
-    nodePort : 30007 
+    - port: 5000
+      nodePort: 30007 
   selector:
    app: python-app
