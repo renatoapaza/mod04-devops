@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Init Terraform') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_terraform']]) {
+                    dir('infraestructura/eks_cluster') {
+                        sh 'terraform init'
+                    }
+                }
+            }
+        }
+
+        stage('Validate Terraform') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_terraform']]) {
+                    dir('infraestructura/eks_cluster') {
+                        sh 'terraform validate'
+                    }
+                }
+            }
+        }
+
+        stage('Plan Terraform') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_terraform']]) {
+                    dir('infraestructura/eks_cluster') {
+                        sh 'terraform plan -no-color'
+                    }
+                }
+            }
+        }
+
+        stage('Apply Terraform') {
+            steps {
+                input "¿Estás seguro de que quieres aplicar este plan de Terraform?"
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_terraform']]) {
+                    dir('infraestructura/eks_cluster') {
+                        sh 'terraform apply -auto-approve -no-color'
+                    }
+                }
+            }
+        }
+    }
+
+}

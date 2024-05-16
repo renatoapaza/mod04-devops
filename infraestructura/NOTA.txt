@@ -1,0 +1,19 @@
+# NOTA: Se recomienda ejecutar y destruir a fin de no incurrir en gastos.
+
+
+1. Instalar el plugin de AWS Credentials y configurar las credenciales.
+    AWS AMI, agregar usuario > introducir el nombre de usaurio y chekear el tipo de credencial "Access key - Programmatic acces"
+    Set permissions > Attach existing policies directly > AmazonEC2FullAcces  
+    Crear.
+
+    En Jenkins crear credencial de tipo "AWS credencial"  con el nombre "aws_terraform"
+    Introducir el nombre del usaurio, Access Key ID y Secret Access ID, de AWS del usuario creado.
+
+2. Verificar el ID del AMI en el archivo de terraform
+3. Key Pair, utilizar el creado en clase
+4. El inventario requerido por Ansible se crea dinamicamente.
+
+Finalmente, indicar que sin necesidad del pipeline jenkins se puede ejecutar el archivo terraform (terraform init).
+
+
+Si todo ejecuta correctamente, jenkins deberia esatr desplegado en:  http://IP_PUBLICA_EC2:8080
