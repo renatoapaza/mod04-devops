@@ -3,7 +3,7 @@ pipeline{
 
     environment {
         IMAGE_NAME = "renatoapaza/python-app"
-        DOCKERHUB_CREDS = credentials("dockerhub")
+        DOCKERHUB_CREDS = credentials("jenkins-udi")
         NameContainer = "python-app"
     }
 
