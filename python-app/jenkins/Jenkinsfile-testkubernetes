@@ -16,11 +16,11 @@ pipeline {
                 script {
                     // Ejecutar comando kubectl version
                     //sh "kubectl version"
-                    withCredentials([file(credentialsId: 'k8s', variable: 'KUBECONFIG')]) {
+                    withCredentials([file(credentialsId: 'pruebamk', variable: 'KUBECONFIG')]) {
                         sh 'kubectl version'
                     }
                 }
             }
         }
     }
-}               
+}  
