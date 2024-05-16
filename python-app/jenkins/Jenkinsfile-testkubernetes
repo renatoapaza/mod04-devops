@@ -16,7 +16,7 @@ pipeline {
                 script {
                     // Ejecutar comando kubectl version
                     //sh "kubectl version"
-                    withCredentials([file(credentialsId: 'pruebamk', variable: 'KUBECONFIG')]) {
+                    withCredentials([file(credentialsId: 'minikube_config', variable: 'KUBECONFIG')]) {
                         sh 'kubectl version'
                     }
                 }

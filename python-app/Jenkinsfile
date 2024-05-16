@@ -28,7 +28,7 @@ pipeline{
             }
         }
 
-        
+        /*
         stage("Docker run"){
             steps{
                 input message: 'Continue?'
@@ -40,7 +40,30 @@ pipeline{
                 """
             }
         }
+        */
         
+        stage("Update Deployment Manifest") {
+            steps {
+                script {
+                    // Construir el nombre de la imagen con el número de build
+                    def newImage = "${IMAGE_NAME}:${BUILD_NUMBER}"
+                    // Usar sed para actualizar el archivo de manifiesto
+                    sh "sed -i 's|IMAGE_PLACEHOLDER|${newImage}|' python-app/k8s/manifest.yaml"
+                    sh "cat python-app/k8s/manifest.yaml "
+                }
+            }
+        }
+
+        stage("Deploy in Kubernetes") {
+             steps {
+                 //input message: 'Continue?'
+                 script {
+                     withCredentials([file(credentialsId: 'minikube_config', variable: 'KUBECONFIG')]) {
+                         sh 'kubectl apply -f python-app/k8s/manifest.yaml'
+                     }
+                 }
+             }
+        }
     
     }
     

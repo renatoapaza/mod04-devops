@@ -47,6 +47,6 @@ spec:
   ports:
     - name: http 
       port: 5000
-      nodePort: 31500 
+      nodePort: 31600
   selector:
    app: python-app
